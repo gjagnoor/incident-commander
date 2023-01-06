@@ -35,7 +35,7 @@ func GetTeamsWithComponentSelector() map[uuid.UUID][]api.ComponentSelector {
 	return teamComponentMap
 }
 
-func GetDeletedComponents() (r Result) {
+func GetAllComponents() (r Result) {
 	Gorm.Raw("SELECT id, name, icon, created_at, deleted_at from component").Scan(&r)
 	return r
 }
