@@ -1,11 +1,10 @@
 # setup helm (macos)
+
 `brew install helm`
 
 `helm dependecy build ./chart`
 
 `helm template incident-commander ./chart`
-
-
 
 # Local kind cluster setup with incident-commander chart.
 
@@ -76,10 +75,10 @@ kubectl apply --filename https://raw.githubusercontent.com/kubernetes/ingress-ng
 kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=90s
 ```
 
-
 Once cluster is created, you can push images to `reposity:5001/<image_name>`. Do configure values files
 
 e.g
+
 ```diff
 modified   chart/values.yaml
 @@ -8,7 +8,7 @@ replicas: 1
@@ -104,7 +103,6 @@ modified   chart/values.yaml
    fullnameOverride: "incident-manager-ui"
    oryKratosURI: http://incident-commander:8080/kratos/
 ```
-
 
 Some of the components depend on config, which is set via aws-sandbox. We need to explicitly apply them to the cluster. To use the configs form aws-sandbox, first fix the config for config-db-rules.yaml and remove the aws check.
 
@@ -133,7 +131,6 @@ Apply configs to the cluster.
 kubectl apply -f ../aws-sandbox/spec/canaries/_tenant/postgres-conf.yaml
 kubectl apply -f ../aws-sandbox/spec/canaries/_tenant/config-db-rules.yaml
 ```
-
 
 Now you are ready to apply the chart to the cluster.
 

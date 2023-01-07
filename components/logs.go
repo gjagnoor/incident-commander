@@ -12,6 +12,61 @@ import (
 	"github.com/flanksource/incident-commander/db"
 )
 
+// func GetAllComponents(start string) (api.Components, error) {
+// 	var components api.ComponentsResponse
+// 	var row struct {
+// 		Name       string
+// 		ExternalID string
+// 		Type       string
+// 	}
+// 	err := db.Gorm.Table("components").Select("name", "external_id", "type").Find(&row).Error
+// 	if err != nil {
+// 		return api.Components{}, err
+// 	}
+
+// 	type payloadBody struct {
+// 		Start string `json:"start"`
+// 	}
+
+// 	payload := payloadBody{
+// 		Start: start,
+// 	}
+// 	payloadBytes, err := json.Marshal(&payload)
+// 	if err != nil {
+// 		return api.Components{}, err
+// 	}
+
+// 	endpoint, err := url.JoinPath(api.ApmHubPath, "/search")
+// 	if err != nil {
+// 		return api.Components{}, err
+// 	}
+
+// 	client := http.NewClient(&http.Config{})
+// 	resp, err := client.Post(endpoint, "application/json", io.NopCloser(strings.NewReader(string(payloadBytes))))
+// 	if err != nil {
+// 		return api.Components{}, err
+// 	}
+
+// 	defer resp.Body.Close()
+// 	body, err := io.ReadAll(resp.Body)
+// 	if err != nil {
+// 		return api.Components{}, err
+// 	}
+
+// 	err = json.Unmarshal(body, &components)
+// 	if err != nil {
+// 		return api.Components{}, err
+// 	}
+
+// 	allComponents := api.Components{
+// 		ID:   row.ExternalID,
+// 		Name: row.Name,
+// 		Type: row.Type,
+// 	}
+
+// 	return allComponents, nil
+// }
+
 func GetLogsByComponent(componentID, start, end string) (api.ComponentLogs, error) {
 	var logs api.LogsResponse
 	var row struct {

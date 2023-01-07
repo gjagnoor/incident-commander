@@ -7,14 +7,6 @@ import (
 	"gorm.io/gorm/clause"
 )
 
-type Result struct {
-  id   string
-  name string
-  icon string
-  created_at string
-  deleted_at string
-}
-
 func GetTeamsWithComponentSelector() map[uuid.UUID][]api.ComponentSelector {
 	var teams []api.Team
 	var teamComponentMap = make(map[uuid.UUID][]api.ComponentSelector)
@@ -33,11 +25,6 @@ func GetTeamsWithComponentSelector() map[uuid.UUID][]api.ComponentSelector {
 		teamComponentMap[team.ID] = teamSpec.Components
 	}
 	return teamComponentMap
-}
-
-func GetAllComponents() (r Result) {
-	Gorm.Raw("SELECT id, name, icon, created_at, deleted_at from component").Scan(&r)
-	return r
 }
 
 func GetComponentsWithSelector(selector api.ComponentSelector) []uuid.UUID {

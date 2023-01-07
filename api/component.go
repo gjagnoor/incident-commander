@@ -36,6 +36,24 @@ type Component struct {
 	Cost30d       float64             `gorm:"column:cost_total_30d"`
 }
 
+// type ComponentLine struct {
+// 	ID string			`json:"id,omitempty"` //nolint
+// 	Name   string           `json:"name"`
+// 	Type   string			`json:"type"`
+// }
+
+// type ComponentsResponse struct {
+// 	Total   int       `json:"total"`
+// 	Results []ComponentLine `json:"results"`
+// }
+
+// type Components struct {
+// 	Components []ComponentLine `json:"components"`
+// 	ID   string    `json:"id"`
+// 	Name string    `json:"name"`
+// 	Type string    `json:"type"`
+// }
+
 func (c Component) AsMap() map[string]any {
 	m := make(map[string]any)
 	b, _ := json.Marshal(&c)
